@@ -4,10 +4,10 @@ from langchain_huggingface import HuggingFaceEndpoint
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
-
+import os
 
 model_name = "Qwen/Qwen2.5-Coder-32B-Instruct"
-hf_api_token = "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"
+hf_api_token = os.environ.get("API_TOKEN")
 
 llm = HuggingFaceEndpoint(
     model=model_name,
