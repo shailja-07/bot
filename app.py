@@ -40,8 +40,11 @@ def get_name(name: str):
 def predict(data: Data):
     input_data = data.text.strip()
     
-    if input_data:
-        info_text=llm_chain.run(input_data)
-    else:
-        print("enter topic")
-    return {"information": info_text} 
+    if not input_data:
+        return {"error": "No topic provided."}
+    
+    try:
+        info_text = llm_chain.run(input_data)
+        return {"information": info_text}
+    except Exception as e:
+        return {"error": f"An error occurred: {str(e)}"}
